@@ -84,9 +84,12 @@ The display settings are available through the `prepr.settings` class, and allow
 ```py
 inst = Example(
     Example(1234, "abcd"),
-    {"a": [1, 2, 3],
-    "b": (True, False)}
+    kwarg={
+        "a": [1, 2, 3],
+        "b": (True, False)
+    }
 )
+inst.attr = "SOMETHING"
 ```
 ## Changing the colorspace
 The colorspace defines how the representation is displayed in the terminal when printed. There are four main colorspaces available (examples of each are also below):
