@@ -1,11 +1,11 @@
 # prepr
 A highly customizible system that allows your class representations (e.g. in `__repr__`), when printed in the terminal, to go from looking like this:
 
-![image of what a normal object representation looks like when printed](https://cdn.discordapp.com/attachments/1030588980867108936/1030588991197691954/unknown.png)
+![image of what a normal object representation looks like when printed](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/no_prepr.png)
 
 to this:
 
-![image of example instance printed with the rgbfull colorspace](docs/default_settings.png)
+![image of example instance printed with the rgbfull colorspace](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/default_settings.png)
 # Install
 `pip install prepr`
 # Constructing a pretty representation
@@ -78,7 +78,7 @@ print(inst)
 ```
 In our terminal, we get:
 
-![image of basic example](docs/basic_example.png)
+![image of basic example](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/basic_example.png)
 # Changing the global display settings
 The display settings are available through the `prepr.settings` class, and allow you to completely change how the representations are created. Settings can be batch-updated with the `settings.update` method, and can be reset to default settings with the `settings.default` method. All of the below examples are using this instance of the `Example` class above:
 ```py
@@ -108,28 +108,28 @@ By default, the `rgbfull` colorspace is used.
 ```py
 print(inst)
 ```
-![image of example instance printed with the rgbfull colorspace](docs/default_settings.png)
+![image of example instance printed with the rgbfull colorspace](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/default_settings.png)
 ### `Colorspace.rgb256`
 ```py
 import prepr
 prepr.settings.csh = prepr.CSHandler(prepr.Colorspace.rgb256)
 print(inst)
 ```
-![image of example instance printed with the rgb256 colorspace](docs/colorspace_rgb256.png)
+![image of example instance printed with the rgb256 colorspace](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/colorspace_rgb256.png)
 ### `Colorspace.rgb8`
 ```py
 import prepr
 prepr.settings.csh = prepr.CSHandler(prepr.Colorspace.rgb8)
 print(inst)
 ```
-![image of example instance printed with the rgb8 colorspace](docs/colorspace_rgb8.png)
+![image of example instance printed with the rgb8 colorspace](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/colorspace_rgb8.png)
 ### `Colorspace.none`
 ```py
 import prepr
 prepr.settings.csh = prepr.CSHandler(prepr.Colorspace.none)
 print(inst)
 ```
-![image of example instance printed with the none colorspace](docs/colorspace_none.png)
+![image of example instance printed with the none colorspace](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/colorspace_none.png)
 ## Custom indent
 A custom indent can be set by assigning `settings.indent` a `str` (which by default is four whitespaces):
 ```py
@@ -137,7 +137,7 @@ import prepr
 prepr.settings.indent = "  "
 print(inst)
 ```
-![image of example instance printed with a custom indent](docs/custom_indent.png)
+![image of example instance printed with a custom indent](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/custom_indent.png)
 ## Custom line break
 A custom line break can be set by assigning `settings.line_break` a `str` (which by default is `"\n"`):
 ```py
@@ -146,7 +146,7 @@ prepr.settings.indent = " " # just so the repr isn't too obnoxious, given the de
 prepr.settings.line_break = ""
 print(inst)
 ```
-![image of example instance printed with a custom line break](docs/custom_line_break.png)
+![image of example instance printed with a custom line break](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/custom_line_break.png)
 ## Force lists, tuples and/or dicts to be collapsed
 By default, lists, tuples and dicts are fully expanded. You can force them to be collapsed with the `settings.force_lists_collapsed`, `settings.force_tuples_collapsed`, and `settings.force_dicts_collapsed` settings. For example:
 ```py
@@ -154,13 +154,13 @@ import prepr
 prepr.settings.force_lists_collapsed = True
 print(inst)
 ```
-![image of example instance printed with force_lists_collapsed=True](docs/force_lists_collapsed.png)
+![image of example instance printed with force_lists_collapsed=True](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/force_lists_collapsed.png)
 ```py
 import prepr
 prepr.settings.force_tuples_collapsed = True
 print(inst)
 ```
-![image of example instance printed with force_tuples_collapsed=True](docs/force_tuples_collapsed.png)
+![image of example instance printed with force_tuples_collapsed=True](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/force_tuples_collapsed.png)
 
 Any objects within the list/tuple/dict (if set to be collapsed) will also be collapsed. For example:
 
@@ -169,7 +169,7 @@ import prepr
 prepr.settings.force_dicts_collapsed = True
 print(inst)
 ```
-![image of example instance printed with force_dicts_collapsed=True](docs/force_dicts_collapsed.png)
+![image of example instance printed with force_dicts_collapsed=True](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/force_dicts_collapsed.png)
 ## Other notes
 In addition to the `settings.default` preset method, there is a `settings.minimal` method, which will force the entire representation into one line with as little spacing as possible. For example:
 ```py
@@ -177,4 +177,4 @@ import prepr
 prepr.settings.minimal()
 print(inst)
 ```
-![image of example instance printed with minimal settings](docs/minimal_settings_preset.png)
+![image of example instance printed with minimal settings](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/minimal_settings_preset.png)
