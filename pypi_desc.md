@@ -6,4 +6,4 @@ to this:
 
 ![image of example instance printed with the rgbfull colorspace](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/default_settings.png)
 
-Learn more about how to use `prepr` by taking a look at the [documentation here](https://github.com/tanrbobanr/prepr/README.md)!
+Learn more about how to use `prepr` by taking a look at the [documentation here](https://github.com/tanrbobanr/prepr/blob/main/README.md)!
