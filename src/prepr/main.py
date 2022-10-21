@@ -46,7 +46,7 @@ def _format_value(value, indent: str, line_break: str) -> str:
 
     # if value is a str
     if _type == str:
-        return settings.csh.f_string(_concat("\"", value, "\""))
+        return settings.csh.f_string(_concat("\"", value.replace("\\", "\\\\").replace("\"", "\\\""), "\""))
     
     # if value is a number
     if _type in [int, float]:
@@ -339,7 +339,7 @@ class prepr:
         return _indent(
             settings.csh.f_operator(settings.comma).join(formatted_args + formatted_kwargs),
             indent
-        )
+        ) if formatted_args or formatted_kwargs else ""
     
 
     def _preformat_attrs(self, custom_line_break: str) -> str:
@@ -369,14 +369,15 @@ class prepr:
         """Create the main representation without any attributes or variable name.
         
         """
+        preformatted_args = self._preformat_args(indent, line_break)
         return prepr_str(
             _concat(
                 self._name,
                 settings.csh.f_bracket("("),
                 self._note if "\n" in settings.line_break else "",
-                self._preformat_args(indent, line_break),
-                indent,
-                line_break,
+                preformatted_args,
+                indent if self._preformat_args(indent, line_break) else "",
+                line_break if self._preformat_args(indent, line_break) else "",
                 settings.csh.f_bracket(")")
             ),
             self
