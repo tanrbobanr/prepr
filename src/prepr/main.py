@@ -53,7 +53,7 @@ def _format_value(value, indent: str, line_break: str) -> str:
         return settings.csh.f_number(_attempt_str(value))
     
     # if value is a bool
-    if _type == bool:
+    if _type == bool or value is None:
         return settings.csh.f_boolean(_attempt_str(value))
 
     # if value is a list
