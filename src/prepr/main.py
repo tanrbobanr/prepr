@@ -1,5 +1,5 @@
 from __future__ import annotations
-import textwrap, inspect, typing, types
+import textwrap, inspect, typing, types, enum
 from .models import settings, prepr_str
 from . import types as prepr_types
 
@@ -115,6 +115,11 @@ def _format_value(value, indent: str, line_break: str) -> str:
         _prepr = value._prepr
         simple = _prepr._build_simple(indent, line_break)
         return simple
+    
+    # if value is an enum
+    if isinstance(value, enum.Enum):
+        values = str(value).split(".")
+        return settings.csh.f_operator(".").join([settings.csh.f_class(class_name) for class_name in values[:-1]]) + settings.csh.f_operator(".") + settings.csh.f_enum(values[-1])
 
     # if value has a __repr__ method defined and the return of that method is a prepr_str
     if hasattr(value, "__repr__"):

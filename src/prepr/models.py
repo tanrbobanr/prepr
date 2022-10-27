@@ -35,6 +35,8 @@ class CSHandler:
         return self.cs.c_error + __text + self.cs.c_reset
     def f_boolean(self, __text) -> str:
         return self.cs.c_boolean + __text + self.cs.c_reset
+    def f_enum(self, __text) -> str:
+        return self.cs.c_enum + __text + self.cs.c_reset
     def f_reset(self, __text) -> str:
         return self.cs.c_reset + __text + self.cs.c_reset
 
@@ -58,6 +60,7 @@ class Colorspace:
         c_bracket = "\033[38;2;254;214;24m"
         c_error = "\033[38;2;243;71;70m"
         c_boolean = "\033[38;2;86;156;213m"
+        c_enum = "\033[38;2;80;193;253m"
         c_reset = "\033[0m"
     class rgb256:
         """Less accurate than `rgbfull` but has slightly greater compatability in other
@@ -77,6 +80,7 @@ class Colorspace:
         c_bracket = "\033[38;5;221m"
         c_error = "\033[38;5;203m"
         c_boolean = "\033[38;5;26m"
+        c_enum = "\033[38;5;26m"
         c_reset = "\033[0m"
     class rgb8:
         """The least accurate but most compatible colorspace. Works in almost all
@@ -96,6 +100,7 @@ class Colorspace:
         c_bracket = "\033[33m"
         c_error = "\033[31m"
         c_boolean = "\033[34m"
+        c_enum = "\033[34m"
         c_reset = "\033[0m"
     class none:
         """A colorspace that will apply no terminal formatting.
@@ -114,6 +119,7 @@ class Colorspace:
         c_bracket = ""
         c_error = ""
         c_boolean = ""
+        c_enum = ""
         c_reset = ""
     @dataclasses.dataclass
     class custom:
@@ -133,6 +139,7 @@ class Colorspace:
         c_bracket: str
         c_error: str
         c_boolean: str
+        c_enum: str
         c_reset: str
 
 
