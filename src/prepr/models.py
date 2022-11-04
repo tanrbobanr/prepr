@@ -160,6 +160,7 @@ class settings:
     force_lists_collapsed: bool = False
     force_tuples_collapsed: bool = False
     force_dicts_collapsed: bool = False
+    force_sub_preprs_collapsed: bool = False
     @staticmethod
     def default() -> None:
         settings.indent = "    "
@@ -172,6 +173,7 @@ class settings:
         settings.force_lists_collapsed = False
         settings.force_tuples_collapsed = False
         settings.force_dicts_collapsed = False
+        settings.force_sub_preprs_collapsed= False
     @staticmethod
     def minimal() -> None:
         settings.indent = ""
@@ -196,7 +198,8 @@ class settings:
         csh: CSHandler = types.MISSING,
         force_lists_collapsed: bool = types.MISSING,
         force_tuples_collapsed: bool = types.MISSING,
-        force_dicts_collapsed: bool = types.MISSING
+        force_dicts_collapsed: bool = types.MISSING,
+        force_sub_preprs_collapsed: bool = types.MISSING
     ):
         """Batch-update settings.
         
@@ -212,14 +215,15 @@ class settings:
             ("csh", csh),
             ("force_lists_collapsed", force_lists_collapsed),
             ("force_tuples_collapsed", force_tuples_collapsed),
-            ("force_dicts_collapsed", force_dicts_collapsed)
+            ("force_dicts_collapsed", force_dicts_collapsed),
+            ("force_sub_preprs_collapsed", force_sub_preprs_collapsed)
         ]
         for name, value in pairs:
             if value != types.MISSING:
                 setattr(self, name, value)
 
 
-class prepr_str(str):
+class pstr(types.pstr):
     """A `str` instance with an added `_prepr` attribute to store the `prepr`
     instance used to create it. Used for nested reprs.
     

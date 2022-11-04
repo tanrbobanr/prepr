@@ -22,20 +22,20 @@ To start, we create an instance of `prepr` initialized with the class instance:
 import prepr
 
 class Example:
-    def __repr__(self):
+    def __repr__(self, *args, **kwargs):
         R = prepr.prepr(self)
 ```
 Then, we start adding positional arguments (of which we have one, `posarg`) by providing the argument value:
 ```py
 class Example:
-    def __repr__(self):
+    def __repr__(sel, *args, **kwargs):
         R = prepr.prepr(self)
         R.arg(self.posarg)
 ```
 Next, we start adding our keyword arguments (of which we have one, `kwarg`) by providing a kwarg name and value. Additionally, we can set the `d` (default) optional argument to a value, in which case the kwarg will not be added to the representation if it is equal to that default value:
 ```py
 class Example:
-    def __repr__(self):
+    def __repr__(self, *args, **kwargs):
         R = prepr.prepr(self)
         R.arg(self.posarg)
         R.kwarg("kwarg", self.kwarg, d=None)
@@ -43,21 +43,21 @@ class Example:
 We can also add attributes that will be displayed after the initial representation. These should only be added for attributes that can change outside of initialization, as displaying attributes that are simply determined by the input variables isn't really necessary (although theres nothing stopping you from adding those attributes too). In the same way as the `kwarg` method, we can provide a default value if wanted:
 ```py
 class Example:
-    def __repr__(self):
+    def __repr__(self, *args, **kwargs):
         R = prepr.prepr(self)
         R.arg(self.posarg)
         R.kwarg("kwarg", self.kwarg, d=None)
         R.attr("attr", self.attr, d="something")
 ```
-Finally, we return the response from the `build` method:
+Finally, we return the response from the `build` method. Note that passthrough args (\*args) and kwargs (\*\*kwargs) are *required*:
 ```py
 class Example:
-    def __repr__(self):
+    def __repr__(self, *args, **kwargs):
         R = prepr.prepr(self)
         R.arg(self.posarg)
         R.kwarg("kwarg", self.kwarg, d=None)
         R.attr("attr", self.attr, d="something")
-        return R.build()
+        return R.build(*args, **kwargs)
 ```
 A few notes: firstly, each of the addition methods (`arg`, `kwarg`, and `attr`) have convenience methods that can be used to add multiple in a single function call; those are: `args`, `kwargs`, and `attrs`. Second, each of the addition methods returns the class instance, which means you can chain if desired. Below, we will create an instance of our example class, then print it:
 ```py
@@ -68,8 +68,12 @@ class Example:
         self.posarg = posarg
         self.kwarg = kwarg
         self.attr = "something"
-    def __repr__(self):
-        return prepr.prepr(self, note="here are some notes").arg(self.posarg).kwarg("kwarg", self.kwarg, d=None).attr("attr", self.attr, d="something").build() # here we also provided a note which will be displayed in the representation, as you will see later
+    def __repr__(self, *args, **kwargs):
+        # here we also provided a note which will be displayed
+        # in the representation, as you will see later
+        return prepr.prepr(self, note="here are some notes").arg(
+            self.posarg).kwarg("kwarg", self.kwarg, d=None).attr("attr",
+            self.attr, d="something").build(*args, **kwargs)
 
 inst = Example("abcd", kwarg=1234)
 inst.attr = [1, 2, 3]
@@ -145,13 +149,15 @@ print(inst)
 A custom line break can be set by assigning `settings.line_break` a `str` (which by default is `"\n"`):
 ```py
 import prepr
-prepr.settings.indent = " " # just so the repr isn't too obnoxious, given the default is four whitespaces
+# we set the indent to a single space just so the repr isn't
+# too obnoxious, given the default is four whitespaces
+prepr.settings.indent = " " 
 prepr.settings.line_break = ""
 print(inst)
 ```
 ![image of example instance printed with a custom line break](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/custom_line_break.png)
-## Force lists, tuples and/or dicts to be collapsed
-By default, lists, tuples and dicts are fully expanded. You can force them to be collapsed with the `settings.force_lists_collapsed`, `settings.force_tuples_collapsed`, and `settings.force_dicts_collapsed` settings. For example:
+## Force lists, tuples, dicts and/or sub-preprs to be collapsed
+By default, lists, tuples, dicts and sub-preprs are fully expanded. You can force them to be collapsed with the `settings.force_lists_collapsed`, `settings.force_tuples_collapsed`, `settings.force_dicts_collapsed`, and `settings.force_sub_preprs_collapsed` settings. For example:
 ```py
 import prepr
 prepr.settings.force_lists_collapsed = True
@@ -165,7 +171,7 @@ print(inst)
 ```
 ![image of example instance printed with force_tuples_collapsed=True](https://raw.githubusercontent.com/tanrbobanr/prepr/main/docs/force_tuples_collapsed.png)
 
-Any objects within the list/tuple/dict (if set to be collapsed) will also be collapsed. For example:
+Any objects within the list/tuple/dict/sub-prepr (if set to be collapsed) will also be collapsed. For example:
 
 ```py
 import prepr
