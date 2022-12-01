@@ -2,6 +2,7 @@ from . import types, models
 import textwrap
 import inspect
 import enum
+import typing
 import types as builtin_types
 
 
@@ -43,19 +44,19 @@ def format_str(v: str) -> str:
     return models.settings.csh.f_string(concat("\"",
         v.replace("\\", "\\\\").replace("\"", "\\\""), "\""))
 
-def format_num(v: int | float) -> str:
+def format_num(v: typing.Union[int, float]) -> str:
     """Format a number (int/float) value.
     
     """
     return models.settings.csh.f_number(attempt_str(v))
 
-def format_bool_none(v: bool | None) -> str:
+def format_bool_none(v: typing.Union[bool, None]) -> str:
     """Format boolean or None value.
     
     """
     return models.settings.csh.f_boolean(attempt_str(v))
 
-def format_list(v: list, exc: dict[int, str], i: str, lb: str) -> str:
+def format_list(v: list, exc: typing.Dict[int, str], i: str, lb: str) -> str:
     """Format a list value.
     
     """
@@ -72,7 +73,7 @@ def format_list(v: list, exc: dict[int, str], i: str, lb: str) -> str:
         models.settings.csh.f_bracket("]")
     )
 
-def format_tuple(v: tuple, exc: dict[int, str], i: str, lb: str) -> str:
+def format_tuple(v: tuple, exc: typing.Dict[int, str], i: str, lb: str) -> str:
     """Format a tuple value.
     
     """
@@ -91,7 +92,7 @@ def format_tuple(v: tuple, exc: dict[int, str], i: str, lb: str) -> str:
         models.settings.csh.f_bracket(")")
     )
 
-def format_dict(v: dict, exc: dict[int, str], i: str, lb: str) -> str:
+def format_dict(v: dict, exc: typing.Dict[int, str], i: str, lb: str) -> str:
     """Format a dict value.
     
     """
@@ -147,7 +148,8 @@ def format_enum(v: enum.Enum) -> str:
         models.settings.csh.f_enum(values[-1]))
 
 
-def format_prepr(v: types.prepr, exc: dict[int, str], i: str, lb: str) -> str:
+def format_prepr(v: types.prepr, exc: typing.Dict[int, str], i: str,
+                 lb: str) -> str:
     """Format a `prepr` value.
     
     """
@@ -158,7 +160,7 @@ def format_prepr(v: types.prepr, exc: dict[int, str], i: str, lb: str) -> str:
     return v._build_simple(exc, I, LB)
 
 
-def format_value(v, exc: dict[int, str], i: str, lb: str) -> str:
+def format_value(v, exc: typing.Dict[int, str], i: str, lb: str) -> str:
     """Format a given text value with the global colorspace depending on its
     type.
     

@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prepr"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
     { name = "Tanner B. Corcoran", email = "tannerbcorcoran@gmail.com" },
 ]
 description = "A system for creating pretty class representations"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.7.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

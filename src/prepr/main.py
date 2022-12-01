@@ -173,7 +173,7 @@ class prepr(types.prepr):
         return self
     
 
-    def _format_args(self, exc: dict[int, str], i: str, lb: str) -> str:
+    def _format_args(self, exc: typing.Dict[int, str], i: str, lb: str) -> str:
         """Format the positional and keyword arguments.
         
         """
@@ -189,7 +189,7 @@ class prepr(types.prepr):
             ) if formatted_args or formatted_kwargs else ""
     
 
-    def _format_attrs(self, exc: dict[int, str], lb: str) -> str:
+    def _format_attrs(self, exc: typing.Dict[int, str], lb: str) -> str:
         """Format the attributes.
         
         """
@@ -223,7 +223,7 @@ class prepr(types.prepr):
         )
 
 
-    def _build_simple(self, exc: dict[int, str], i: str, lb: str) -> str:
+    def _build_simple(self, exc: typing.Dict[int, str], i: str, lb: str) -> str:
         """Create the main representation without any attributes or variable
         name.
         
@@ -241,7 +241,8 @@ class prepr(types.prepr):
     
     
     def build(self, simple: bool = False, collapsed: bool = False,
-              return_prepr: bool = False) -> types.pstr | types.prepr:
+              return_prepr: bool = False
+              ) -> typing.Union[types.pstr, types.prepr]:
         """Build the representation.
         
         Arguments

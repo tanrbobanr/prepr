@@ -3,8 +3,8 @@ import dataclasses
 
 
 class CSHandler:
-    """Used to create a colorspace handler given a valid `types.Colorspace` (e.g. those
-    found in `Colorspace`).
+    """Used to create a colorspace handler given a valid `types.Colorspace`
+    (e.g. those found in `Colorspace`).
     
     """
     def __init__(self, cs: types.Colorspace) -> None:
@@ -63,8 +63,8 @@ class Colorspace:
         c_enum = "\033[38;2;80;193;253m"
         c_reset = "\033[0m"
     class rgb256:
-        """Less accurate than `rgbfull` but has slightly greater compatability in other
-        terminals.
+        """Less accurate than `rgbfull` but has slightly greater compatability
+        in other terminals.
         
         """
         c_function = "\033[38;5;179m"
@@ -83,8 +83,8 @@ class Colorspace:
         c_enum = "\033[38;5;26m"
         c_reset = "\033[0m"
     class rgb8:
-        """The least accurate but most compatible colorspace. Works in almost all
-        terminals.
+        """The least accurate but most compatible colorspace. Works in almost
+        all terminals.
         
         """
         c_function = "\033[33m"
@@ -144,8 +144,8 @@ class Colorspace:
 
 
 class settings:
-    """Global settings used by all `prepr` instances. `csh` (colorspace handler) must be
-    created with the `CSHandler` class and a valid `Colorspace`, e.g.
+    """Global settings used by all `prepr` instances. `csh` (colorspace handler)
+    must be created with the `CSHandler` class and a valid `Colorspace`, e.g.
     `CSHandler(Colorspace.rgb256)`.
     
     """

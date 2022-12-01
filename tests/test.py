@@ -9,7 +9,7 @@ class TESTCLASS:
         self.b = b
         self.c = c
         self.e = None
-    def __repr__(self, *args, **kwargs) -> prepr.types.pstr:
+    def __repr__(self, *args, **kwargs) -> prepr.pstr:
         return prepr.prepr(self).args(self.a, self.b).kwargs(None, c = self.c
             ).attr("e", self.e, None).build(*args, **kwargs)
 
